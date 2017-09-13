@@ -6,13 +6,12 @@ assignment3
 
 edit filename
 add, show : Try_except
-
 '''
 
 
 import pickle
 
-dbfilename = 'assignment3.dat'
+dbfilename = 'test3_4.dat'
 
 def readScoreDB():
     try:
@@ -45,8 +44,11 @@ def doScoreDB(scdb):
         parse = inputstr.split(" ")
         if len(parse) > 2:
             split_addscore = parse[2].strip('\'')
-            print(split_addscore)
-            add_score = int(split_addscore)
+            try:
+                add_score = int(split_addscore)
+            except ValueError:
+                print("ValueError")
+                continue
         if parse[0] == 'add':
             try :
                 record = {'Name': parse[1], 'Age': parse[2], 'Score': parse[3]}
@@ -54,13 +56,22 @@ def doScoreDB(scdb):
             except:
                 print("Invalid command: " + parse[0] + " " + parse[1])
         elif parse[0] == 'del':
-            for p in scdb:
-                if p['Name'] == parse[1]:
-                    scdb.remove(p)
+            try:
+                for p in scdb:
+                    if p['Name'] == parse[1]:
+                        scdb.remove(p)
+                for j in scdb:
+                    if p['Name'] == parse[1]:
+                        scdb.remove(p)
+            except:
+                print("del Error")
         elif parse[0] == 'inc':
-            for j in scdb:
-                if j['Name'] == parse[1]:
-                    j['Score'] = str(int(j['Score']) + add_score)
+            try:
+                for j in scdb:
+                    if j['Name'] == parse[1]:
+                        j['Score'] = str(int(j['Score']) + add_score)
+            except:
+                print("inc Error")
         elif parse[0] == 'show':
             try:
                 sortKey = 'Name' if len(parse) == 1 else parse[1]
@@ -72,11 +83,14 @@ def doScoreDB(scdb):
             for i in scdb:
                 if i['Name'] == parse[1]:
                     empty_list.append(i)
+                else:
+                    print("Not Found")
             showScoreDB(empty_list, 'Age')
         elif parse[0] == 'quit':
             break
         else:
             print("Invalid command: " + parse[0])
+
 #scdb type == list in dictionary
 #scdb속 Keyname 의 값 순서대로 sort후 출력
 def showScoreDB(scdb, keyname):
@@ -85,8 +99,6 @@ def showScoreDB(scdb, keyname):
             print(attr + "=" + p[attr], end=' ')
         print()
 
-
 scoredb = readScoreDB()
 doScoreDB(scoredb)
 writeScoreDB(scoredb)
-
