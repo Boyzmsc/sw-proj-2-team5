@@ -3,9 +3,11 @@
 20171604 김진우
 Software Project-2
 assignment3
-
 edit filename
 add, show : Try_except
+
++find kim : notfound
++del : notfound
 '''
 
 
@@ -56,15 +58,14 @@ def doScoreDB(scdb):
             except:
                 print("Invalid command: " + parse[0] + " " + parse[1])
         elif parse[0] == 'del':
-            try:
+            Co_scdb = scdb[:]
+            for l in range(len(scdb)):
                 for p in scdb:
                     if p['Name'] == parse[1]:
                         scdb.remove(p)
-                for j in scdb:
-                    if p['Name'] == parse[1]:
-                        scdb.remove(p)
-            except:
-                print("del Error")
+            if len(scdb) == len(Co_scdb):
+                print("Not Found", parse[1])
+                continue
         elif parse[0] == 'inc':
             try:
                 for j in scdb:
@@ -83,8 +84,8 @@ def doScoreDB(scdb):
             for i in scdb:
                 if i['Name'] == parse[1]:
                     empty_list.append(i)
-                else:
-                    print("Not Found")
+            if len(empty_list) == 0:
+                print("Not Found")
             showScoreDB(empty_list, 'Age')
         elif parse[0] == 'quit':
             break
