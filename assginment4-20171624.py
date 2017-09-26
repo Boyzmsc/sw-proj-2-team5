@@ -18,7 +18,12 @@ while True:
         if num0 == -1:
             break
         num1 = int(input("m값을 입력하시오: "))
-        if num1 > num0:
+        if num0 == 0 and num1 != 0:
+            ans0 = 0
+            ans1 = 0
+            print(ans0)
+            print(ans1)
+        elif num0 !=0 and num1 > num0:
             print("n과 m값이 잘못되었습니다.")
         else:
             ans0 = combination(num0,num1)
