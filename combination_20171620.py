@@ -4,6 +4,11 @@ def Combination(m,n):
             return 1
         else:
             return Combination(m - 1, n - 1) + Combination(m - 1, n)
+    elif m == 0 and n >= 0:
+        if n > m:
+            return 0
+        else:
+            return 1
     else:
         print("Error")
         quit()
