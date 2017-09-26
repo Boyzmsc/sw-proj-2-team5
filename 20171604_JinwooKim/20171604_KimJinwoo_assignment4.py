@@ -15,6 +15,13 @@ def fac(a):
 
 n = int(input("Enter n: "))
 m = int(input("Enter m: "))
-
-result = fac(n) / (fac(m)*fac(n-m))
+try:
+    if n==0 and n < m:
+        result = 1
+    elif n!=0 and n < m:
+        print("Error")
+        exit()
+    result = fac(n) / (fac(m)*fac(n-m))
+except RecursionError:
+    result = 1
 print("C(%d,%d) = %d "%(n,m,result))
