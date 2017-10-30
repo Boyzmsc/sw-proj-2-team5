@@ -1,3 +1,9 @@
+"""
+국민대학교 소프트웨어학부 20171604 김진우
+소프트웨어프로젝트2  Assignment6.py
+"""
+
+
 import pickle
 import sys
 from PyQt5.QtWidgets import (QWidget, QPushButton,
